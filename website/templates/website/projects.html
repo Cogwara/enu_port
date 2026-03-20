@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Projects - MRCHRYS ENT NIG LTD{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold text-white mb-3">Our Projects</h1>
+                <p class="lead text-light">Showcasing our successful implementations across various sectors</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Grid -->
+<section class="py-5">
+    <div class="container">
+        {% if projects %}
+            <div class="row g-4">
+                {% for project in projects %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm project-card">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}" style="height: 250px; object-fit: cover;">
+                            {% else %}
+                                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                                    <div class="text-center text-muted">
+                                        <i class="fas fa-image fa-4x mb-2"></i>
+                                        <p>Project Image</p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <span class="badge bg-primary mb-2">{{ project.category }}</span>
+                                <h5 class="card-title fw-bold">{{ project.title }}</h5>
+                                <p class="card-text text-muted">{{ project.description|truncatewords:30 }}</p>
+                                {% if project.completion_date %}
+                                    <small class="text-muted">
+                                        <i class="fas fa-calendar me-1"></i>
+                                        Completed: {{ project.completion_date|date:"M Y" }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <a href="{% url 'project_detail' project.id %}" class="btn btn-sm btn-primary">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-5x text-muted mb-3"></i>
+                <h4 class="text-muted">No Projects Yet</h4>
+                <p class="text-muted mb-4">Our portfolio of projects is being updated. Check back soon for showcases of our latest work!</p>
+                <a href="{% url 'services' %}" class="btn btn-primary">
+                    Explore Our Services
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Project Categories Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Our Expertise Areas</h2>
+            <p class="lead text-muted">We've successfully delivered projects across various sectors</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-tower-cell fa-3x text-primary mb-3"></i>
+                    <h5 class="fw-bold">Telecommunications</h5>
+                    <p class="text-muted small">Site installation, fiber optics, network optimization.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-code fa-3x text-info mb-3"></i>
+                    <h5 class="fw-bold">Software Development</h5>
+                    <p class="text-muted small">Web apps, mobile solutions, enterprise systems.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                    <h5 class="fw-bold">Cybersecurity</h5>
+                    <p class="text-muted small">Security audits, penetration testing, monitoring.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-hard-hat fa-3x text-warning mb-3"></i>
+                    <h5 class="fw-bold">Engineering</h5>
+                    <p class="text-muted small">Construction, civil engineering, maintenance.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-bolt fa-3x text-danger mb-3"></i>
+                    <h5 class="fw-bold">Electrical & Power</h5>
+                    <p class="text-muted small">Solar systems, inverters, electrical installation.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-truck fa-3x text-secondary mb-3"></i>
+                    <h5 class="fw-bold">Logistics</h5>
+                    <p class="text-muted small">Procurement, import/export, transportation.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-film fa-3x text-dark mb-3"></i>
+                    <h5 class="fw-bold">Media & Events</h5>
+                    <p class="text-muted small">Event management, media production, content.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-chart-bar fa-3x text-primary mb-3"></i>
+                    <h5 class="fw-bold">Data & Analytics</h5>
+                    <p class="text-muted small">Data analytics, smart systems, digital transformation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Why Our Clients Choose Us</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-check-circle fa-2x text-success mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Proven Track Record</h5>
+                        <p class="text-muted small">Years of successful project delivery across multiple sectors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-rocket fa-2x text-info mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Innovative Approach</h5>
+                        <p class="text-muted small">Latest technologies and creative problem-solving.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-headset fa-2x text-primary mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Dedicated Support</h5>
+                        <p class="text-muted small">Responsive team committed to your project success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-success text-white">
+    <div class="container text-center">
+        <h2 class="h1 mb-4">Ready for Your Next Project?</h2>
+        <p class="lead mb-4">
+            Let's turn your ideas into successful outcomes.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+            <i class="fas fa-envelope me-2"></i>Start Your Project
+        </a>
+    </div>
+</section>
+{% endblock %}

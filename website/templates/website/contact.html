@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Contact Us - MRCHRYS ENT NIG LTD{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold text-white mb-3">Get in Touch</h1>
+                <p class="lead text-light">We'd love to hear from you. Let's discuss your project or inquiry.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information & Form -->
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5">
+            <!-- Contact Information -->
+            <div class="col-lg-4">
+                <div class="mb-4">
+                    <h4 class="fw-bold mb-3">Contact Information</h4>
+                    <p class="text-muted">Reach out using any of the following methods:</p>
+                </div>
+
+                <!-- Phone -->
+                <div class="mb-4 d-flex gap-3">
+                    <div>
+                        <i class="fas fa-phone fa-lg text-primary mt-1"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold">Phone</h6>
+                        <a href="tel:{{ company.phone }}" class="text-decoration-none text-dark">
+                            {{ company.phone }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4 d-flex gap-3">
+                    <div>
+                        <i class="fas fa-envelope fa-lg text-primary mt-1"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold">Email</h6>
+                        <a href="mailto:{{ company.email }}" class="text-decoration-none text-dark">
+                            {{ company.email }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="mb-4 d-flex gap-3">
+                    <div>
+                        <i class="fas fa-map-marker-alt fa-lg text-primary mt-1"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold">Address</h6>
+                        <p class="text-dark">{{ company.address }}</p>
+                    </div>
+                </div>
+
+                <!-- WhatsApp -->
+                <div class="mb-4 d-flex gap-3">
+                    <div>
+                        <i class="fab fa-whatsapp fa-lg text-success mt-1"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold">WhatsApp</h6>
+                        <a href="https://wa.me/{{ company.whatsapp|cut:' '|cut:'+' }}" class="text-decoration-none text-dark" target="_blank">
+                            {{ company.whatsapp }}
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Links / Business Hours -->
+                <div class="mt-5">
+                    <h6 class="fw-bold mb-3">Follow Us</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-outline-primary btn-sm" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-info btn-sm" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-danger btn-sm" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-dark btn-sm" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h4 class="fw-bold mb-4">Send us a Message</h4>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <form method="POST" action="{% url 'contact' %}" novalidate>
+                            {% csrf_token %}
+
+                            <!-- Name Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label fw-bold">
+                                    Full Name <span class="text-danger">*</span>
+                                </label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.name.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.email.id_for_label }}" class="form-label fw-bold">
+                                    Email Address <span class="text-danger">*</span>
+                                </label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.email.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label fw-bold">
+                                    Phone Number (Optional)
+                                </label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.phone.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Message Field -->
+                            <div class="mb-4">
+                                <label for="{{ form.message.id_for_label }}" class="form-label fw-bold">
+                                    Message <span class="text-danger">*</span>
+                                </label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.message.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid gap-2 mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Message
+                                </button>
+                            </div>
+
+                            <!-- Additional Info -->
+                            <p class="text-muted small">
+                                <i class="fas fa-lock me-1"></i>
+                                Your information is safe with us. We respect your privacy.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Quick Response Info -->
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>We aim to respond within 24 hours.</strong> For urgent matters, please call us directly 
+                    or reach out via WhatsApp.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Alternative Contact Methods -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Other Ways to Connect</h2>
+            <p class="lead text-muted">Choose the communication method that works best for you</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-envelope fa-3x text-primary mb-3"></i>
+                    <h5 class="fw-bold">Email</h5>
+                    <p class="text-muted small mb-3">Send us an email and we'll reply within 24 hours.</p>
+                    <a href="mailto:{{ company.email }}" class="btn btn-sm btn-outline-primary">
+                        Send Email
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                    <h5 class="fw-bold">Phone Call</h5>
+                    <p class="text-muted small mb-3">Call us during business hours for immediate assistance.</p>
+                    <a href="tel:{{ company.phone }}" class="btn btn-sm btn-outline-success">
+                        Call Now
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fab fa-whatsapp fa-3x text-success mb-3"></i>
+                    <h5 class="fw-bold">WhatsApp</h5>
+                    <p class="text-muted small mb-3">Chat with us on WhatsApp for quick responses.</p>
+                    <a href="https://wa.me/{{ company.whatsapp|cut:' '|cut:'+' }}" class="btn btn-sm btn-outline-success" target="_blank">
+                        Message Us
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center p-4 bg-white rounded shadow-sm">
+                    <i class="fas fa-map-marker-alt fa-3x text-danger mb-3"></i>
+                    <h5 class="fw-bold">Visit</h5>
+                    <p class="text-muted small mb-3">Visit our office in {{ company.address }}</p>
+                    <a href="#" class="btn btn-sm btn-outline-danger">
+                        Visit Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                What is your response time for inquiries?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We aim to respond to all inquiries within 24 hours. For urgent matters, 
+                                please call us directly or message via WhatsApp for immediate assistance.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Do you offer free consultations?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Yes, we offer free initial consultations to discuss your project requirements 
+                                and how we can help you achieve your goals.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                Which services does MRCHRYS offer?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                We specialize in telecommunications, software development, cybersecurity, 
+                                engineering, electrical systems, logistics, general contracting, media, 
+                                training, and data analytics. Visit our Services page for detailed information.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                What is your service area?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Our primary service area is Nigeria, but we also work with clients across Africa 
+                                and internationally. Contact us to discuss your specific location requirements.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                How can I request a quote?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                You can request a quote by filling out the contact form above, emailing us, 
+                                or contacting us via WhatsApp. We'll provide a customized quote based on your 
+                                specific requirements.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

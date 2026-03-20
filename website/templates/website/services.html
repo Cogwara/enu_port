@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}Services - MRCHRYS ENT NIG LTD{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold text-white mb-3">Our Services</h1>
+                <p class="lead text-light">Comprehensive solutions tailored to your business needs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <p class="lead text-muted">We specialize in delivering innovative, reliable, and cost-effective solutions 
+            across multiple industries and business sectors.</p>
+        </div>
+
+        <div class="row g-4">
+            {% for category, items in services.items %}
+                <div class="col-lg-6">
+                    <div class="card h-100 border-0 shadow-sm service-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas {{ service_icons|get_item:category }} fa-2x text-primary me-3"></i>
+                                <h4 class="card-title fw-bold mb-0">{{ category }}</h4>
+                            </div>
+                            <ul class="list-group list-group-flush mt-3">
+                                {% for item in items %}
+                                    <li class="list-group-item border-0 ps-0 py-2">
+                                        <i class="fas fa-check-circle text-success me-2 small"></i>
+                                        {{ item }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pt-0">
+                            <a href="{% url 'contact' %}" class="btn btn-sm btn-primary">
+                                Inquire About This Service
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Service Process Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Our Service Process</h2>
+            <p class="lead text-muted">How we deliver excellence at every step</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px; font-size: 28px;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">1. Consultation</h5>
+                    <p class="text-muted small">We listen to understand your needs and challenges.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px; font-size: 28px;">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">2. Solution Design</h5>
+                    <p class="text-muted small">We craft tailored solutions for your specific requirements.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px; font-size: 28px;">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">3. Implementation</h5>
+                    <p class="text-muted small">We execute with precision and professional expertise.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center mb-3" 
+                         style="width: 80px; height: 80px; font-size: 28px;">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h5 class="fw-bold mb-2">4. Support</h5>
+                    <p class="text-muted small">We provide ongoing support and continuous improvement.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Services Highlight -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="h1 mb-3">Why Choose Our Services?</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-award fa-2x text-primary mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Quality Assurance</h5>
+                        <p class="text-muted small">We maintain highest standards with rigorous quality checks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-clock fa-2x text-success mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Timely Delivery</h5>
+                        <p class="text-muted small">We respect deadlines and deliver on schedule consistently.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-lock fa-2x text-info mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Secure & Reliable</h5>
+                        <p class="text-muted small">Data security and system reliability are our priorities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-users fa-2x text-warning mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Expert Team</h5>
+                        <p class="text-muted small">Skilled professionals with deep industry experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-chart-line fa-2x text-danger mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">Results-Driven</h5>
+                        <p class="text-muted small">We focus on measurable outcomes and business impact.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex gap-3">
+                    <div>
+                        <i class="fas fa-headset fa-2x text-secondary mt-1"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-2">24/7 Support</h5>
+                        <p class="text-muted small">We're available when you need us for any issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="h1 mb-4">Ready to Get Started?</h2>
+        <p class="lead mb-4">
+            Let's discuss which of our services can best help your organization succeed.
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                <i class="fas fa-envelope me-2"></i>Request a Quote
+            </a>
+            <a href="https://wa.me/{{ company.whatsapp|cut:' '|cut:'+' }}" class="btn btn-success btn-lg" target="_blank">
+                <i class="fab fa-whatsapp me-2"></i>Chat on WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Custom template filter helper if needed
+// This can be replaced with a Django custom filter for better practice
+</script>
+{% endblock %}
