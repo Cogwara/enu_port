@@ -1,4 +1,4 @@
-# MRCHRYS ENT NIG LTD Website
+# Mr Chrys Ent LTD Website
 
 A professional, multi-industry company website for MRCHRYS ENT NIG LTD - a Nigerian company offering telecom, software, cybersecurity, engineering, logistics, and general contract services.
 
